@@ -8,11 +8,20 @@ _DEFAULT_LOG = _timing_logger.info
 
 
 def set_log_func(func: Callable[[str], None]):
+    """
+    Set default log function for all follow-up contexts.
+    :param func:
+    :return:
+    """
     global _DEFAULT_LOG
     _DEFAULT_LOG = func
 
 
 class measure_time(AbstractContextManager):
+    """
+    Provides a simple context to keep track of time
+    """
+
     def __init__(self, name: str = "", log_func: Callable[[str], None] = None):
         self.log_func = log_func if log_func else _DEFAULT_LOG
         self.name = name
@@ -27,7 +36,11 @@ class measure_time(AbstractContextManager):
         self.value = (perf_counter_ns() - self.start) / 1e9
         self._print()
 
-    def _print(self):
+    def _print(self) -> None:
+        """
+        Print in seconds if above 1s, else in ms. Outputs to the log function.
+        :return:
+        """
         unit = "s"
         if self.value < 1:
             self.value *= 1000
@@ -40,6 +53,10 @@ class measure_time(AbstractContextManager):
 
     @property
     def elapsed(self) -> float:
+        """
+        Returns time elapsed since context entering in seconds.
+        :return:
+        """
         if self.value is None:
             return (perf_counter_ns() - self.start) / 1e9
         return self.value
