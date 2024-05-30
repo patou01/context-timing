@@ -24,7 +24,7 @@ class measure_time(AbstractContextManager):
 
     def __init__(self, name: str = "", log_func: Callable[[str], None] = None):
         self.log_func = log_func if log_func else _DEFAULT_LOG
-        self.name = name
+        self.name = f" {name}" if name else ""
         self.start = None
         self.value = None
 
@@ -47,7 +47,7 @@ class measure_time(AbstractContextManager):
             unit = "ms"
         if self.log_func:
             try:
-                self.log_func(f"Context {self.name} took {self.value:.3f} {unit}")
+                self.log_func(f"Context{self.name} took {self.value:.3f} {unit}")
             except:  # noqa: E722
                 pass
 
