@@ -28,9 +28,9 @@ def test_print():
             sleep(0.1)
         m.assert_called_once()
 
-    def hello():
-        pass
 
-    set_log_func(hello)
-    with measure_time():
-        sleep(0.1)
+def test_elapsed():
+    with measure_time() as m:
+        sleep_time = 1
+        sleep(sleep_time)
+        assert abs(m.elapsed - sleep_time) < 0.01
