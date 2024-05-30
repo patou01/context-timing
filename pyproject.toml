@@ -1,0 +1,11 @@
+[project]
+name = "context_timing"
+version = "0.0.2"
+dependencies = []
+requires-python = ">= 3"
+readme = "README.md"
+description = "Yet another timer for a block of code"
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
