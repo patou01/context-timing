@@ -13,7 +13,7 @@ def set_log_func(func: Callable[[str], None]):
     _DEFAULT_LOG = func
 
 
-class TimeThis(AbstractContextManager):
+class measure_time(AbstractContextManager):
     def __init__(self, name: str = "", log_func: Callable[[str], None] = None):
         self.log_func = log_func if log_func else _DEFAULT_LOG
         self.name = name

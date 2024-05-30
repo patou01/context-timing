@@ -1,2 +1,2 @@
-from .context_timing import TimeThis, set_log_func
+from .context_timing import measure_time, set_log_func
 
