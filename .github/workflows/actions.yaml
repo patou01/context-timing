@@ -23,6 +23,9 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: pip install build twine pytest
 
+    - name: Build package
+      run: python -m build
+
     - name: install self
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: pip install .
@@ -30,6 +33,3 @@ jobs:
     - name: test
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: pytest tests/
-
-    - name: Build package
-      run: python -m build
