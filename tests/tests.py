@@ -3,7 +3,7 @@ import logging
 from time import sleep
 from unittest import mock
 
-from context_timing.context_timing import set_log_func, measure_time
+from context_timing.context_timing import measure_time, set_log_func
 
 
 def test_print():

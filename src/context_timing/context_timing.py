@@ -1,6 +1,5 @@
-
-from logging import getLogger
 from contextlib import AbstractContextManager
+from logging import getLogger
 from time import perf_counter_ns
 from typing import Callable
 
@@ -25,7 +24,7 @@ class measure_time(AbstractContextManager):
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.value = (perf_counter_ns() - self.start)/1e9
+        self.value = (perf_counter_ns() - self.start) / 1e9
         self._print()
 
     def _print(self):
@@ -36,11 +35,11 @@ class measure_time(AbstractContextManager):
         if self.log_func:
             try:
                 self.log_func(f"Context {self.name} took {self.value:.3f} {unit}")
-            except:
+            except:  # noqa: E722
                 pass
 
     @property
     def elapsed(self) -> float:
         if self.value is None:
-            return (perf_counter_ns() - self.start)/1e9
+            return (perf_counter_ns() - self.start) / 1e9
         return self.value

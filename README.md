@@ -1,6 +1,6 @@
 # context-timing
 
-A python context manager for timing of a block. Somewhat similar to [contexttimer](https://github.com/brouberol/contexttimer) or 
+A python context manager for timing of a block. Somewhat similar to [contexttimer](https://github.com/brouberol/contexttimer) or
 [timethis](https://github.com/meribold/timethis).
 
 Uses `perf_counter()` underneath. The use case does not warrant looking at `perf_counter_ns()`.
@@ -9,8 +9,8 @@ Uses `perf_counter()` underneath. The use case does not warrant looking at `perf
 
 ## Main use case
 
-This package is **not** intended to measure perfomance like timeit would do. The main use case here is to get a quick way to 
-display how long a block of code takes to execute. For instance if you have a large amount of code that runs, and have a 
+This package is **not** intended to measure perfomance like timeit would do. The main use case here is to get a quick way to
+display how long a block of code takes to execute. For instance if you have a large amount of code that runs, and have a
 feeling that the duration of some functions could help you understand the behaviour. This package lets you easily
 add a display of this timing.
 
