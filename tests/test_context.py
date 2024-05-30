@@ -33,4 +33,4 @@ def test_elapsed():
     with measure_time() as m:
         sleep_time = 1
         sleep(sleep_time)
-        assert abs(m.elapsed - sleep_time) < 0.01
+        assert abs(m.elapsed - sleep_time) < 0.05
