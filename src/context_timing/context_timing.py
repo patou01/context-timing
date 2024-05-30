@@ -31,4 +31,7 @@ class TimeThis(AbstractContextManager):
             unit = "ms"
 
         if self.log_func:
-            self.log_func(f"Context {self.name} took {value} {unit}")
+            try:
+                self.log_func(f"Context {self.name} took {value} {unit}")
+            except:
+                pass

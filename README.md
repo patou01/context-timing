@@ -1,2 +1,3 @@
 # context-timing
-A python context manager for timing of a block. Similar to contexttimer
+
+A python context manager for timing of a block. Similar to contexttimer or timethis.

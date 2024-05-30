@@ -8,7 +8,6 @@ from context_timing.context_timing import set_log_func, TimeThis
 
 def test_print():
     logging.basicConfig(level=logging.INFO)
-    # print
 
     with mock.patch.object(builtins, "print") as m:
         set_log_func(print)
@@ -28,3 +27,10 @@ def test_print():
         with TimeThis():
             sleep(0.1)
         m.assert_called_once()
+
+    def hello():
+        pass
+
+    set_log_func(hello)
+    with TimeThis():
+        sleep(0.1)
