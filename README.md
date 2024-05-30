@@ -3,7 +3,9 @@
 A python context manager for timing of a block. Somewhat similar to [contexttimer](https://github.com/brouberol/contexttimer) or
 [timethis](https://github.com/meribold/timethis).
 
-Uses `perf_counter()` underneath. The use case does not warrant looking at `perf_counter_ns()`.
+Uses `perf_counter_ns()` underneath.
+
+*As expected, this causes a mild performance hit. And the timings are not super accurate*
 
 # Use case
 
