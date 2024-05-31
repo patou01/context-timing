@@ -4,7 +4,8 @@ version = "0.0.1"
 dependencies = []
 requires-python = ">= 3"
 readme = "README.md"
-description = "Yet another timer for a block of code"
+description = "Yet another way to measure code execution duration using a context"
+license = {file = "LICENSE"}
 
 [build-system]
 requires = ["setuptools >= 61.0"]
