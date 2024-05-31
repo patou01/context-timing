@@ -41,15 +41,19 @@ class measure_time(AbstractContextManager):
         Print in seconds if above 1s, else in ms. Outputs to the log function.
         :return:
         """
-        unit = "s"
-        if self._elapsed_time < 1:
-            self._elapsed_time *= 1000
-            unit = "ms"
+        elapsed_time_unit = "s"
+        elapsed_time = self._elapsed_time
+
+        if elapsed_time < 1:
+            elapsed_time *= 1000
+            elapsed_time_unit = "ms"
+
         if self._log_func:
+            log_message = (
+                f"Context{self._name} took {elapsed_time:.3f} {elapsed_time_unit}"
+            )
             try:
-                self._log_func(
-                    f"Context{self._name} took {self._elapsed_time:.3f} {unit}"
-                )
+                self._log_func(log_message)
             except:  # noqa: E722
                 pass
 
