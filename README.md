@@ -5,7 +5,7 @@ A python context manager for timing of a block. Somewhat similar to [contexttime
 
 Uses `perf_counter_ns()` underneath.
 
-*As expected, this causes a mild performance hit. And the timings are not super accurate*
+The goal of this package is not to be extremely accurate or lightweight. Though both should be acceptable.
 
 # Use case
 
@@ -16,18 +16,6 @@ display how long a block of code takes to execute. For instance if you have a la
 feeling that the duration of some functions could help you understand the behaviour. This package lets you easily
 add a display of this timing.
 
-## In-between timing
-
-The package, similarly to `contexttimer` lets you get the time since start.
-
-```python
-from context_timing import measure_time
-
-with measure_time() as m:
-    sleep(1)
-    value = abs(m.elapsed - 1)  # True
-
-```
 
 # How to use
 
@@ -68,4 +56,17 @@ with measure_time(logging.info):
 
 with measure_time():
     sleep(2)
+```
+
+## In-between timing
+
+The package, similarly to `contexttimer` lets you get the time since start, within the context.
+
+```python
+from context_timing import measure_time
+
+with measure_time() as m:
+    sleep(1)
+    m.print()  # ~1s
+
 ```

@@ -34,15 +34,15 @@ class measure_time(AbstractContextManager):
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
         self._elapsed_time = (perf_counter_ns() - self._start_time) / 1e9
-        self._print()
+        self.print()
 
-    def _print(self) -> None:
+    def print(self) -> None:
         """
         Print in seconds if above 1s, else in ms. Outputs to the log function.
         :return:
         """
         elapsed_time_unit = "s"
-        elapsed_time = self._elapsed_time
+        elapsed_time = self.elapsed
 
         if elapsed_time < 1:
             elapsed_time *= 1000
@@ -50,7 +50,8 @@ class measure_time(AbstractContextManager):
 
         if self._log_func:
             log_message = (
-                f"Context{self._name} took {elapsed_time:.3f} {elapsed_time_unit}"
+                f"Context{self._name} - "
+                f"time elapsed since entry {elapsed_time:.3f} {elapsed_time_unit}"
             )
             try:
                 self._log_func(log_message)

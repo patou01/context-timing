@@ -1,5 +1,5 @@
 [project]
-name = "context_timing"
+name = "context-timing"
 version = "0.0.1"
 dependencies = []
 requires-python = ">= 3"

@@ -34,3 +34,4 @@ def test_elapsed():
         sleep_time = 1
         sleep(sleep_time)
         assert abs(m.elapsed - sleep_time) < 0.05
+        m.print()
