@@ -1,0 +1,35 @@
+name: Build and test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9.13'
+        architecture: 'x86'
+
+    - name: install python tools
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: pip install build twine pytest
+
+    - name: Build package
+      run: python -m build
+
+    - name: install self
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: pip install .
+
+    - name: test
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: pytest tests/
