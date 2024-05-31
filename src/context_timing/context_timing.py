@@ -23,17 +23,17 @@ class measure_time(AbstractContextManager):
     """
 
     def __init__(self, name: str = "", log_func: Callable[[str], None] = None):
-        self.log_func = log_func if log_func else _DEFAULT_LOG
-        self.name = f" {name}" if name else ""
-        self.start = None
-        self.value = None
+        self._log_func = log_func if log_func else _DEFAULT_LOG
+        self._name = f" {name}" if name else ""
+        self._start_time = None
+        self._elapsed_time = None
 
     def __enter__(self):
-        self.start = perf_counter_ns()
+        self._start_time = perf_counter_ns()
         return self
 
     def __exit__(self, exc_type, exc_value, exc_traceback):
-        self.value = (perf_counter_ns() - self.start) / 1e9
+        self._elapsed_time = (perf_counter_ns() - self._start_time) / 1e9
         self._print()
 
     def _print(self) -> None:
@@ -42,21 +42,23 @@ class measure_time(AbstractContextManager):
         :return:
         """
         unit = "s"
-        if self.value < 1:
-            self.value *= 1000
+        if self._elapsed_time < 1:
+            self._elapsed_time *= 1000
             unit = "ms"
-        if self.log_func:
+        if self._log_func:
             try:
-                self.log_func(f"Context{self.name} took {self.value:.3f} {unit}")
+                self._log_func(
+                    f"Context{self._name} took {self._elapsed_time:.3f} {unit}"
+                )
             except:  # noqa: E722
                 pass
 
     @property
     def elapsed(self) -> float:
         """
-        Returns time elapsed since context entering in seconds.
+        Returns time elapsed since entering the context, in seconds.
         :return:
         """
-        if self.value is None:
-            return (perf_counter_ns() - self.start) / 1e9
-        return self.value
+        if self._elapsed_time is None:
+            return (perf_counter_ns() - self._start_time) / 1e9
+        return self._elapsed_time
